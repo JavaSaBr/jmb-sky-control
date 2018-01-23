@@ -2,7 +2,8 @@ package com.ss.editor.sky.control.tree.node;
 
 import com.ss.editor.annotation.FromAnyThread;
 import com.ss.editor.annotation.FxThread;
-import com.ss.editor.ui.Icons;
+import com.ss.editor.sky.control.PluginIcons;
+import com.ss.editor.sky.control.PluginMessages;
 import com.ss.editor.ui.control.tree.node.TreeNode;
 import javafx.scene.image.Image;
 import jme3utilities.sky.SunAndStars;
@@ -23,12 +24,12 @@ public class SunAndStarsTreeNode extends TreeNode<SunAndStars> {
     @Override
     @FromAnyThread
     public @NotNull String getName() {
-        return "Sun and stars";
+        return PluginMessages.MODEL_FILE_EDITOR_NODE_SUN_AND_STARS;
     }
 
     @Override
     @FxThread
     public @Nullable Image getIcon() {
-        return Icons.SETTINGS_16;
+        return PluginIcons.STARS_16;
     }
 }

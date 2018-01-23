@@ -1,0 +1,1 @@
+com/ss/editor/sky/control/icons/stars.svg icon made by http://www.flaticon.com/authors/freepik from www.flaticon.com

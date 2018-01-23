@@ -2,6 +2,7 @@ package com.ss.editor.sky.control.tree.node;
 
 import com.ss.editor.annotation.FromAnyThread;
 import com.ss.editor.annotation.FxThread;
+import com.ss.editor.sky.control.PluginMessages;
 import com.ss.editor.ui.Icons;
 import com.ss.editor.ui.control.model.ModelNodeTree;
 import com.ss.editor.ui.control.tree.NodeTree;
@@ -36,7 +37,7 @@ public class SkyControlTreeNode extends ControlTreeNode<SkyControl> {
     @Override
     @FromAnyThread
     public @NotNull String getName() {
-        return "Sky";
+        return PluginMessages.MODEL_FILE_EDITOR_NODE_SKY_CONTROL;
     }
 
     @Override

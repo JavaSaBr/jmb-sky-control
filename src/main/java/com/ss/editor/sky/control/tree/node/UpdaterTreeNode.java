@@ -2,6 +2,7 @@ package com.ss.editor.sky.control.tree.node;
 
 import com.ss.editor.annotation.FromAnyThread;
 import com.ss.editor.annotation.FxThread;
+import com.ss.editor.sky.control.PluginMessages;
 import com.ss.editor.ui.Icons;
 import com.ss.editor.ui.control.tree.node.TreeNode;
 import javafx.scene.image.Image;
@@ -23,12 +24,12 @@ public class UpdaterTreeNode extends TreeNode<Updater> {
     @Override
     @FromAnyThread
     public @NotNull String getName() {
-        return "Updater";
+        return PluginMessages.MODEL_FILE_EDITOR_NODE_UPDATER;
     }
 
     @Override
     @FxThread
     public @Nullable Image getIcon() {
-        return Icons.PARTICLES_16;
+        return Icons.UPDATER_16;
     }
 }

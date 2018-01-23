@@ -3,3 +3,4 @@
 /build/
 /embedded-plugins/
 /out/
+*.so

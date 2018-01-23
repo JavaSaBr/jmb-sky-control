@@ -15,8 +15,13 @@ import com.ss.editor.ui.control.tree.node.impl.spatial.SpatialTreeNode;
 import com.ss.rlib.plugin.PluginContainer;
 import com.ss.rlib.plugin.PluginSystem;
 import com.ss.rlib.plugin.annotation.PluginDescription;
+import com.ss.rlib.util.FileUtils;
+import com.ss.rlib.util.Utils;
 import jme3utilities.sky.SkyControl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.net.URL;
 
 /**
  * The implementation of an editor plugin.
@@ -31,6 +36,17 @@ import org.jetbrains.annotations.NotNull;
         description = "Provides integration with the library 'SkyControl'."
 )
 public class SkyControlEditorPlugin extends EditorPlugin {
+
+    @NotNull
+    private static final String GRADLE_DEPENDENCIES;
+
+    @NotNull
+    private static final String MAVEN_DEPENDENCIES;
+
+    static {
+        GRADLE_DEPENDENCIES = FileUtils.read(SkyControlEditorPlugin.class.getResourceAsStream("/com/ss/editor/sky/control/dependency/gradle.html"));
+        MAVEN_DEPENDENCIES = FileUtils.read(SkyControlEditorPlugin.class.getResourceAsStream("/com/ss/editor/sky/control/dependency/maven.html"));
+    }
 
     public SkyControlEditorPlugin(@NotNull final PluginContainer pluginContainer) {
         super(pluginContainer);
@@ -69,5 +85,23 @@ public class SkyControlEditorPlugin extends EditorPlugin {
 
         AbstractSceneFileEditor.registerPreSaveHandler(prePostSaveHandler::preSave);
         AbstractSceneFileEditor.registerPostSaveHandler(prePostSaveHandler::postSave);
+    }
+
+    @Override
+    @FromAnyThread
+    public @Nullable String getUsedGradleDependencies() {
+        return GRADLE_DEPENDENCIES;
+    }
+
+    @Override
+    @FromAnyThread
+    public @Nullable String getUsedMavenDependencies() {
+        return MAVEN_DEPENDENCIES;
+    }
+
+    @Override
+    @FromAnyThread
+    public @Nullable URL getHomePageUrl() {
+        return Utils.get(() -> new URL("https://github.com/JavaSaBr/jmb-sky-control"));
     }
 }

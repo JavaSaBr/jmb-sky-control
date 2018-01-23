@@ -3,6 +3,7 @@ package com.ss.editor.sky.control.tree.action;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.control.Control;
 import com.ss.editor.annotation.FxThread;
+import com.ss.editor.sky.control.PluginMessages;
 import com.ss.editor.ui.Icons;
 import com.ss.editor.ui.control.tree.NodeTree;
 import com.ss.editor.ui.control.tree.action.impl.control.AbstractCreateControlAction;
@@ -26,7 +27,7 @@ public class CreateSkyControlAction extends AbstractCreateControlAction {
 
     @Override
     protected @NotNull String getName() {
-        return "SkyControl";
+        return PluginMessages.MODEL_NODE_TREE_ACTION_CREATE_SKY_CONTROL;
     }
 
     @Override
