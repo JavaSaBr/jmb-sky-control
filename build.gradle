@@ -56,9 +56,9 @@ configurations {
 
 dependencies {
     compile 'com.github.JavaSaBr:jmonkeybuilder:develop-SNAPSHOT'
-        compile 'jme3utilities:SkyControl:0.9.8'
+        compile 'jme3utilities:SkyControl:0.9.11'
 
-    pluginDependences ('jme3utilities:SkyControl:0.9.8') {
+    pluginDependences ('jme3utilities:SkyControl:0.9.11') {
         exclude group: 'org.jmonkeyengine'
         exclude group: 'org.jetbrains'
     }
