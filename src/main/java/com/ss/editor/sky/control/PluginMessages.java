@@ -35,4 +35,6 @@ public interface PluginMessages {
     @NotNull String MODEL_PROPERTY_MAIN_MULTIPLIER = RESOURCE_BUNDLE.getString("ModelPropertyMainMultiplier");
     @NotNull String MODEL_PROPERTY_AMBIENT_LIGHT = RESOURCE_BUNDLE.getString("ModelPropertyAmbientLight");
     @NotNull String MODEL_PROPERTY_AMBIENT_MULTIPLIER = RESOURCE_BUNDLE.getString("ModelPropertyAmbientMultiplier");
+
+    @NotNull String FILE_CREATOR_SCENE_WITH_SKY_CONTROL = RESOURCE_BUNDLE.getString("FileCreatorSceneWithSkyControl");
 }

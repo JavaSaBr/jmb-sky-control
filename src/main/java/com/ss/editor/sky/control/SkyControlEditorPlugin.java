@@ -3,10 +3,12 @@ package com.ss.editor.sky.control;
 import com.ss.editor.annotation.FromAnyThread;
 import com.ss.editor.annotation.FxThread;
 import com.ss.editor.plugin.EditorPlugin;
+import com.ss.editor.sky.control.creator.SceneWithSkyControlFileCreator;
 import com.ss.editor.sky.control.handler.PrePostSaveHandler;
 import com.ss.editor.sky.control.property.SkyControlPropertyBuilder;
 import com.ss.editor.sky.control.tree.SkyControlTreeNodeFactory;
 import com.ss.editor.sky.control.tree.action.CreateSkyControlAction;
+import com.ss.editor.ui.component.creator.FileCreatorRegistry;
 import com.ss.editor.ui.component.editor.impl.scene.AbstractSceneFileEditor;
 import com.ss.editor.ui.control.property.builder.PropertyBuilderRegistry;
 import com.ss.editor.ui.control.tree.node.factory.TreeNodeFactoryRegistry;
@@ -30,7 +32,7 @@ import java.net.URL;
  */
 @PluginDescription(
         id = "com.ss.editor.sky.control",
-        version = "1.0.0",
+        version = "1.1.0",
         minAppVersion = "1.6.0",
         name = "SkyControl Support",
         description = "Provides integration with the library 'SkyControl'."
@@ -64,6 +66,13 @@ public class SkyControlEditorPlugin extends EditorPlugin {
     public void register(@NotNull final PropertyBuilderRegistry registry) {
         super.register(registry);
         registry.register(SkyControlPropertyBuilder.getInstance());
+    }
+
+    @Override
+    @FromAnyThread
+    public void register(@NotNull final FileCreatorRegistry registry) {
+        super.register(registry);
+        registry.register(SceneWithSkyControlFileCreator.DESCRIPTION);
     }
 
     @Override

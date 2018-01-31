@@ -1,5 +1,5 @@
 
-## SkyControl Support 1.0.0
+## SkyControl Support 1.1.0
 
 It's a plugin for jMonkeyBuilder which provides an integration the SkyControl library with jMB.
 This plugin is embedded in jMB since 1.6.0 version.
