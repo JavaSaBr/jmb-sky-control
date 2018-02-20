@@ -45,8 +45,7 @@ public class SkyControlTreeNodeFactory implements TreeNodeFactory {
     }
 
     @Override
-    @FxThread
-    public int getOrder() {
+    public int getPriority() {
         return 10;
     }
 }
