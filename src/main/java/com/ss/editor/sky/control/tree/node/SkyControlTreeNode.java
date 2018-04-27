@@ -8,12 +8,10 @@ import com.ss.editor.ui.control.model.ModelNodeTree;
 import com.ss.editor.ui.control.tree.NodeTree;
 import com.ss.editor.ui.control.tree.node.TreeNode;
 import com.ss.editor.ui.control.tree.node.impl.control.ControlTreeNode;
-import com.ss.rlib.util.array.Array;
-import com.ss.rlib.util.array.ArrayFactory;
+import com.ss.rlib.common.util.array.Array;
+import com.ss.rlib.common.util.array.ArrayFactory;
 import javafx.scene.image.Image;
 import jme3utilities.sky.SkyControl;
-import jme3utilities.sky.SunAndStars;
-import jme3utilities.sky.Updater;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class SkyControlTreeNode extends ControlTreeNode<SkyControl> {
 
-    public SkyControlTreeNode(@NotNull final SkyControl element, final long objectId) {
+    public SkyControlTreeNode(@NotNull SkyControl element, long objectId) {
         super(element, objectId);
     }
 
@@ -41,18 +39,18 @@ public class SkyControlTreeNode extends ControlTreeNode<SkyControl> {
     }
 
     @Override
-    public boolean hasChildren(@NotNull final NodeTree<?> nodeTree) {
+    public boolean hasChildren(@NotNull NodeTree<?> nodeTree) {
         return nodeTree instanceof ModelNodeTree;
     }
 
     @Override
-    public @NotNull Array<TreeNode<?>> getChildren(@NotNull final NodeTree<?> nodeTree) {
+    public @NotNull Array<TreeNode<?>> getChildren(@NotNull NodeTree<?> nodeTree) {
 
-        final SkyControl element = getElement();
-        final Updater updater = element.getUpdater();
-        final SunAndStars sunAndStars = element.getSunAndStars();
+        var skyControl = getElement();
+        var updater = skyControl.getUpdater();
+        var sunAndStars = skyControl.getSunAndStars();
 
-        final Array<TreeNode<?>> result = ArrayFactory.newArray(TreeNode.class);
+        var result = ArrayFactory.<TreeNode<?>>newArray(TreeNode.class);
         result.add(FACTORY_REGISTRY.createFor(updater));
         result.add(FACTORY_REGISTRY.createFor(sunAndStars));
 

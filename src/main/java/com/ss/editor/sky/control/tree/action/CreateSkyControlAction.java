@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class CreateSkyControlAction extends AbstractCreateControlAction {
 
-    public CreateSkyControlAction(@NotNull final NodeTree<?> nodeTree, @NotNull final TreeNode<?> node) {
+    public CreateSkyControlAction(@NotNull NodeTree<?> nodeTree, @NotNull TreeNode<?> node) {
         super(nodeTree, node);
     }
 
@@ -37,7 +37,7 @@ public class CreateSkyControlAction extends AbstractCreateControlAction {
 
     @Override
     @FxThread
-    protected @NotNull Control createControl(@NotNull final Spatial parent) {
+    protected @NotNull Control createControl(@NotNull Spatial parent) {
         return new SkyControl(EditorUtil.getAssetManager(), EditorUtil.getGlobalCamera(),
                 0.9f, true, true);
     }

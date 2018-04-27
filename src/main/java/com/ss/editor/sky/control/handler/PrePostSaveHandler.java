@@ -4,8 +4,8 @@ import static java.lang.ThreadLocal.withInitial;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.ss.editor.annotation.FxThread;
-import com.ss.rlib.util.dictionary.DictionaryFactory;
-import com.ss.rlib.util.dictionary.ObjectDictionary;
+import com.ss.rlib.common.util.dictionary.DictionaryFactory;
+import com.ss.rlib.common.util.dictionary.ObjectDictionary;
 import jme3utilities.sky.SkyControl;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,17 +17,18 @@ import org.jetbrains.annotations.NotNull;
 public class PrePostSaveHandler {
 
     private static class DataInfo {
+
         private final Node node;
         private final int index;
 
-        private DataInfo(final Node node, final int index) {
+        private DataInfo(Node node, int index) {
             this.node = node;
             this.index = index;
         }
     }
 
-    @NotNull
-    private static final ThreadLocal<ObjectDictionary<Spatial, DataInfo>> LOCAL_DATA_INFOS = withInitial(DictionaryFactory::newObjectDictionary);
+    private static final ThreadLocal<ObjectDictionary<Spatial, DataInfo>> LOCAL_DATA_INFOS =
+            withInitial(DictionaryFactory::newObjectDictionary);
 
     /**
      * Handle the pre save processing of the spatial.
@@ -35,28 +36,28 @@ public class PrePostSaveHandler {
      * @param spatial the spatial.
      */
     @FxThread
-    public void preSave(@NotNull final Spatial spatial) {
+    public void preSave(@NotNull Spatial spatial) {
 
         if (!(spatial instanceof Node)) {
             return;
         }
 
-        final SkyControl control = spatial.getControl(SkyControl.class);
-        if (control == null) {
+        var skyControl = spatial.getControl(SkyControl.class);
+        if (skyControl == null) {
             return;
         }
 
-        final Node node = (Node) spatial;
-        final int index = node.getChildIndex(control.getSubtree());
+        var node = (Node) spatial;
+        var index = node.getChildIndex(skyControl.getSubtree());
 
-        if(index == -1) {
+        if (index == -1) {
             return;
         }
 
         node.detachChildAt(index);
 
-        final ObjectDictionary<Spatial, DataInfo> dataInfos = LOCAL_DATA_INFOS.get();
-        dataInfos.put(spatial, new DataInfo(control.getSubtree(), index));
+        LOCAL_DATA_INFOS.get()
+                .put(spatial, new DataInfo(skyControl.getSubtree(), index));
     }
 
     /**
@@ -65,19 +66,19 @@ public class PrePostSaveHandler {
      * @param spatial the spatial.
      */
     @FxThread
-    public void postSave(@NotNull final Spatial spatial) {
+    public void postSave(@NotNull Spatial spatial) {
 
         if (!(spatial instanceof Node)) {
             return;
         }
 
-        final SkyControl control = spatial.getControl(SkyControl.class);
-        if (control == null) {
+        var skyControl = spatial.getControl(SkyControl.class);
+        if (skyControl == null) {
             return;
         }
 
-        final ObjectDictionary<Spatial, DataInfo> dataInfos = LOCAL_DATA_INFOS.get();
-        final DataInfo dataInfo = dataInfos.remove(spatial);
+        var dataInfos = LOCAL_DATA_INFOS.get();
+        var dataInfo = dataInfos.remove(spatial);
         if (dataInfo == null) {
             return;
         }

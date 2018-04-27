@@ -13,8 +13,6 @@ import com.ss.editor.ui.component.creator.FileCreatorDescription;
 import com.ss.editor.ui.component.creator.impl.EmptySceneCreator;
 import com.ss.editor.util.EditorUtil;
 import jme3utilities.sky.SkyControl;
-import jme3utilities.sky.SunAndStars;
-import jme3utilities.sky.Updater;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -24,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SceneWithSkyControlFileCreator extends EmptySceneCreator {
 
-    @NotNull
     public static final FileCreatorDescription DESCRIPTION = new FileCreatorDescription();
 
     static {
@@ -36,36 +33,38 @@ public class SceneWithSkyControlFileCreator extends EmptySceneCreator {
     @FxThread
     protected @NotNull SceneNode createScene() {
 
-        final SkyControl control = new SkyControl(EditorUtil.getAssetManager(), EditorUtil.getGlobalCamera(),
-                0.9f, true, true);
-        control.setCloudiness(1F);
-        control.setCloudsRate(2F);
+        var assetManager = EditorUtil.getAssetManager();
+        var camera = EditorUtil.getGlobalCamera();
 
-        final SunAndStars sunAndStars = control.getSunAndStars();
+        var skyControl = new SkyControl(assetManager, camera, 0.9f, true, true);
+        skyControl.setCloudiness(1F);
+        skyControl.setCloudsRate(2F);
+
+        var sunAndStars = skyControl.getSunAndStars();
         sunAndStars.setHour(12);
 
-        final DirectionalLight directionalLight = new DirectionalLight();
-        final AmbientLight ambientLight = new AmbientLight();
+        var directionalLight = new DirectionalLight();
+        var ambientLight = new AmbientLight();
 
-        final Updater updater = control.getUpdater();
+        var updater = skyControl.getUpdater();
         updater.setAmbientLight(ambientLight);
         updater.setMainLight(directionalLight);
 
-        final EditableHqDirectionalLightFromSceneShadowFilter shadowFilter = new EditableHqDirectionalLightFromSceneShadowFilter();
+        var shadowFilter = new EditableHqDirectionalLightFromSceneShadowFilter();
         shadowFilter.setRenderBackFacesShadows(true);
         shadowFilter.setShadowIntensity(0.7F);
         shadowFilter.setEdgeFilteringMode(EdgeFilteringMode.PCF8);
         shadowFilter.setLight(directionalLight);
 
-        final SceneNode sceneNode = super.createScene();
+        var sceneNode = super.createScene();
         sceneNode.addFilter(new EditableFXAAFilter());
         sceneNode.addFilter(shadowFilter);
         sceneNode.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
-        sceneNode.addControl(control);
+        sceneNode.addControl(skyControl);
         sceneNode.addLight(ambientLight);
         sceneNode.addLight(directionalLight);
 
-        control.setEnabled(true);
+        skyControl.setEnabled(true);
 
         return sceneNode;
     }
