@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class UpdaterTreeNode extends TreeNode<Updater> {
 
-    public UpdaterTreeNode(@NotNull final Updater element, final long objectId) {
+    public UpdaterTreeNode(@NotNull Updater element, long objectId) {
         super(element, objectId);
     }
 

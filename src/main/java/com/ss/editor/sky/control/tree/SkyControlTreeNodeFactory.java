@@ -1,6 +1,6 @@
 package com.ss.editor.sky.control.tree;
 
-import static com.ss.rlib.util.ClassUtils.unsafeCast;
+import static com.ss.rlib.common.util.ClassUtils.unsafeCast;
 import com.ss.editor.annotation.FromAnyThread;
 import com.ss.editor.annotation.FxThread;
 import com.ss.editor.sky.control.tree.node.SkyControlTreeNode;
@@ -21,7 +21,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class SkyControlTreeNodeFactory implements TreeNodeFactory {
 
-    @NotNull
     private static final SkyControlTreeNodeFactory INSTANCE = new SkyControlTreeNodeFactory();
 
     @FromAnyThread
@@ -31,7 +30,7 @@ public class SkyControlTreeNodeFactory implements TreeNodeFactory {
 
     @Override
     @FxThread
-    public <T, V extends TreeNode<T>> @Nullable V createFor(@Nullable final T element, final long objectId) {
+    public <T, V extends TreeNode<T>> @Nullable V createFor(@Nullable T element, long objectId) {
 
         if (element instanceof SkyControl) {
             return unsafeCast(new SkyControlTreeNode((SkyControl) element, objectId));
