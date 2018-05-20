@@ -4,3 +4,8 @@
 /embedded-plugins/
 /out/
 *.so
+/bin/
+/.settings/
+.project
+.classpath
+.dll
