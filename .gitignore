@@ -3,9 +3,10 @@
 /build/
 /embedded-plugins/
 /out/
+*.iml
 *.so
 /bin/
 /.settings/
 .project
 .classpath
-.dll
+*.dll
