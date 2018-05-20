@@ -23,7 +23,6 @@ import java.util.List;
  */
 public class SkyControlPropertyBuilder extends EditableModelObjectPropertyBuilder {
 
-    @NotNull
     private static final SkyControlPropertyBuilder INSTANCE = new SkyControlPropertyBuilder();
 
     @FromAnyThread
@@ -37,30 +36,30 @@ public class SkyControlPropertyBuilder extends EditableModelObjectPropertyBuilde
 
     @Override
     @FxThread
-    protected @Nullable List<EditableProperty<?, ?>> getProperties(@NotNull final Object object) {
+    protected @Nullable List<EditableProperty<?, ?>> getProperties(@NotNull Object object) {
 
-        final List<EditableProperty<?, ?>> result = new ArrayList<>();
+        var result = new ArrayList<EditableProperty<?, ?>>();
 
         if (object instanceof SkyControl) {
 
-            final SkyControl control = (SkyControl) object;
+            var skyControl = (SkyControl) object;
 
             result.add(new SimpleProperty<>(BOOLEAN, PluginMessages.MODEL_PROPERTY_CLOUD_MODULATION,
-                    control, SkyControl::getCloudModulation, SkyControl::setCloudModulation));
+                    skyControl, SkyControl::getCloudModulation, SkyControl::setCloudModulation));
             result.add(new SimpleProperty<>(FLOAT, PluginMessages.MODEL_PROPERTY_CLOUDS_SPEED,
-                    control, SkyControl::getCloudsRate, SkyControl::setCloudsRate));
+                    skyControl, SkyControl::getCloudsRate, SkyControl::setCloudsRate));
             result.add(new SimpleProperty<>(FLOAT, PluginMessages.MODEL_PROPERTY_CLOUDINESS, 0.1F, 0, 1F,
-                    control, c ->  c.getCloudLayer(0).getOpacity(), SkyControlCore::setCloudiness));
+                    skyControl, c ->  c.getCloudLayer(0).getOpacity(), SkyControlCore::setCloudiness));
             result.add(new SimpleProperty<>(FLOAT, PluginMessages.MODEL_PROPERTY_CLOUDS_Y_OFFSET, 0.1F, 0, 1F,
-                    control, SkyControl::getCloudsYOffset, SkyControl::setCloudsYOffset));
+                    skyControl, SkyControl::getCloudsYOffset, SkyControl::setCloudsYOffset));
             result.add(new SimpleProperty<>(FLOAT, PluginMessages.MODEL_PROPERTY_TOP_VERTICAL_ANGLE, 0.1F, 0F, 1.784F,
-                    control, SkyControl::getTopVerticalAngle, SkyControl::setTopVerticalAngle));
+                    skyControl, SkyControl::getTopVerticalAngle, SkyControl::setTopVerticalAngle));
             result.add(new SimpleProperty<>(ENUM, PluginMessages.MODEL_PROPERTY_LUNAR_PHASE,
-                    control, SkyControl::getPhase, SkyControl::setPhase));
+                    skyControl, SkyControl::getPhase, SkyControl::setPhase));
 
         } else if (object instanceof SunAndStars) {
 
-            final SunAndStars sunAndStars = (SunAndStars) object;
+            var sunAndStars = (SunAndStars) object;
 
             result.add(new SimpleProperty<>(FLOAT, PluginMessages.MODEL_PROPERTY_OBSERVER_LATITUDE, 0.1F, -FastMath.HALF_PI, FastMath.HALF_PI,
                     sunAndStars, SunAndStars::getObserverLatitude, SunAndStars::setObserverLatitude));
@@ -71,7 +70,7 @@ public class SkyControlPropertyBuilder extends EditableModelObjectPropertyBuilde
 
         }  else if (object instanceof Updater) {
 
-            final Updater updater = (Updater) object;
+            var updater = (Updater) object;
 
             result.add(new SimpleProperty<>(DIRECTION_LIGHT_FROM_SCENE, PluginMessages.MODEL_PROPERTY_MAIN_LIGHT,
                     updater, Updater::getMainLight, Updater::setMainLight));

@@ -13,7 +13,7 @@ public class UpdaterNode {
     @NotNull
     private final SkyControl skyControl;
 
-    public UpdaterNode(@NotNull final SkyControl skyControl) {
+    public UpdaterNode(@NotNull SkyControl skyControl) {
         this.skyControl = skyControl;
     }
 }

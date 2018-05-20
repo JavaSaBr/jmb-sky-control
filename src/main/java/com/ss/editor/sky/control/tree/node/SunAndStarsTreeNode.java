@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class SunAndStarsTreeNode extends TreeNode<SunAndStars> {
 
-    public SunAndStarsTreeNode(@NotNull final SunAndStars element, final long objectId) {
+    public SunAndStarsTreeNode(@NotNull SunAndStars element, long objectId) {
         super(element, objectId);
     }
 

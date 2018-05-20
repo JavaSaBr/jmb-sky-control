@@ -13,7 +13,7 @@ public class SunAndStarsNode {
     @NotNull
     private final SkyControl skyControl;
 
-    public SunAndStarsNode(@NotNull final SkyControl skyControl) {
+    public SunAndStarsNode(@NotNull SkyControl skyControl) {
         this.skyControl = skyControl;
     }
 }
