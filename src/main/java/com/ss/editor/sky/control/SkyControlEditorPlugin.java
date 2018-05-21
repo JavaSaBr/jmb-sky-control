@@ -32,7 +32,7 @@ import java.net.URL;
  */
 @PluginDescription(
         id = "com.ss.editor.sky.control",
-        version = "1.2.0",
+        version = "1.2.1",
         minAppVersion = "1.8.0",
         name = "SkyControl Support",
         description = "Provides integration with the library 'SkyControl'."
@@ -89,7 +89,7 @@ public class SkyControlEditorPlugin extends EditorPlugin {
         });
 
         NodeTreeNode.registerNodeChildrenFilter((parent, spatial) -> {
-            final SkyControl control = parent.getControl(SkyControl.class);
+            var control = parent.<SkyControl>getControl(SkyControl.class);
             return control != null && spatial == control.getSubtree();
         });
 
