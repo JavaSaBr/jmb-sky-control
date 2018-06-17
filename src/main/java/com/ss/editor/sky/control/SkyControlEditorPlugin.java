@@ -1,7 +1,7 @@
 package com.ss.editor.sky.control;
 
+import com.ss.editor.annotation.BackgroundThread;
 import com.ss.editor.annotation.FromAnyThread;
-import com.ss.editor.annotation.FxThread;
 import com.ss.editor.plugin.EditorPlugin;
 import com.ss.editor.sky.control.creator.SceneWithSkyControlFileCreator;
 import com.ss.editor.sky.control.handler.PrePostSaveHandler;
@@ -32,17 +32,14 @@ import java.net.URL;
  */
 @PluginDescription(
         id = "com.ss.editor.sky.control",
-        version = "1.2.1",
-        minAppVersion = "1.8.0",
+        version = "1.2.2",
+        minAppVersion = "1.9.0",
         name = "SkyControl Support",
         description = "Provides integration with the library 'SkyControl'."
 )
 public class SkyControlEditorPlugin extends EditorPlugin {
 
-    @NotNull
     private static final String GRADLE_DEPENDENCIES;
-
-    @NotNull
     private static final String MAVEN_DEPENDENCIES;
 
     static {
@@ -56,35 +53,37 @@ public class SkyControlEditorPlugin extends EditorPlugin {
     }
 
     @Override
-    @FromAnyThread
+    @BackgroundThread
     public void register(@NotNull TreeNodeFactoryRegistry registry) {
         super.register(registry);
         registry.register(SkyControlTreeNodeFactory.getInstance());
     }
 
     @Override
-    @FromAnyThread
+    @BackgroundThread
     public void register(@NotNull PropertyBuilderRegistry registry) {
         super.register(registry);
         registry.register(SkyControlPropertyBuilder.getInstance());
     }
 
     @Override
-    @FromAnyThread
+    @BackgroundThread
     public void register(@NotNull FileCreatorRegistry registry) {
         super.register(registry);
         registry.register(SceneWithSkyControlFileCreator.DESCRIPTION);
     }
 
     @Override
-    @FxThread
+    @BackgroundThread
     public void onAfterCreateJavaFxContext(@NotNull PluginSystem pluginSystem) {
         super.onAfterCreateJavaFxContext(pluginSystem);
 
         SpatialTreeNode.registerCreationControlAction((node, tree) -> {
+
             if (node instanceof NodeTreeNode) {
                 return new CreateSkyControlAction(tree, node);
             }
+
             return null;
         });
 
