@@ -1,6 +1,5 @@
 package com.ss.editor.sky.control.handler;
 
-import static java.lang.ThreadLocal.withInitial;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.ss.editor.annotation.FxThread;
@@ -28,7 +27,7 @@ public class PrePostSaveHandler {
     }
 
     private static final ThreadLocal<ObjectDictionary<Spatial, DataInfo>> LOCAL_DATA_INFOS =
-            withInitial(DictionaryFactory::newObjectDictionary);
+            ThreadLocal.withInitial(DictionaryFactory::newObjectDictionary);
 
     /**
      * Handle the pre save processing of the spatial.
@@ -73,12 +72,14 @@ public class PrePostSaveHandler {
         }
 
         var skyControl = spatial.getControl(SkyControl.class);
+
         if (skyControl == null) {
             return;
         }
 
         var dataInfos = LOCAL_DATA_INFOS.get();
         var dataInfo = dataInfos.remove(spatial);
+
         if (dataInfo == null) {
             return;
         }
