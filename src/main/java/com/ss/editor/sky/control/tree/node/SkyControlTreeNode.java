@@ -50,7 +50,7 @@ public class SkyControlTreeNode extends ControlTreeNode<SkyControl> {
         var updater = skyControl.getUpdater();
         var sunAndStars = skyControl.getSunAndStars();
 
-        var result = ArrayFactory.<TreeNode<?>>newArray(TreeNode.class);
+        var result = Array.<TreeNode<?>>ofType(TreeNode.class);
         result.add(FACTORY_REGISTRY.createFor(updater));
         result.add(FACTORY_REGISTRY.createFor(sunAndStars));
 

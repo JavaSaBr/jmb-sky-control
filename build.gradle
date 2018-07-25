@@ -1,23 +1,13 @@
 import java.nio.file.Files
 import java.nio.file.Paths
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
-    }
-}
-
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
-apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'application'
 
 group = 'com.spaceshift'
-version = '1.2.2'
+version = '1.2.3'
 
 ext.artifactId = 'jmb-sky-control'
 
@@ -31,20 +21,9 @@ compileTestJava {
 }
 
 ext.junitPlatformVersion = "1.0.0"
-ext.junitJupiterVersion = "5.0.0"
-ext.log4jVersion = '2.6.2'
+ext.junitJupiterVersion = "5.2.0"
 
 mainClassName = "com.ss.editor.DevelopPluginStarter"
-
-junitPlatform {
-    filters {
-        engines {
-        }
-        tags {
-        }
-    }
-    logManager 'org.apache.logging.log4j.jul.LogManager'
-}
 
 repositories {
     jcenter()
@@ -63,26 +42,17 @@ dependencies {
 
     compile 'com.spaceshift:jmonkeybuilder:1.9.0'
 
-    compile ('jme3utilities:SkyControl:0.9.12') {
+    compile ('jme3utilities:SkyControl:0.9.13') {
         exclude group: 'org.jmonkeyengine'
     }
 
-    pluginDependences ('jme3utilities:SkyControl:0.9.12') {
+    pluginDependences ('jme3utilities:SkyControl:0.9.13') {
         exclude group: 'org.jmonkeyengine'
         exclude group: 'org.jetbrains'
     }
 
-    testCompile "org.junit.platform:junit-platform-commons:$junitPlatformVersion"
-    testRuntime "org.junit.platform:junit-platform-engine:$junitPlatformVersion"
-
     testCompile "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
-
-    testRuntime "org.apache.logging.log4j:log4j-core:$log4jVersion"
-    testRuntime "org.apache.logging.log4j:log4j-jul:$log4jVersion"
-
-    // Only needed to run tests in an (IntelliJ) IDE(A) that bundles an older version
-    testCompile "org.junit.platform:junit-platform-launcher:$junitPlatformVersion"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -191,7 +161,7 @@ task deployPlugin(type: Zip, dependsOn: 'preparePlugin') {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.8'
+    gradleVersion = '4.9'
 }
 
 run.dependsOn {

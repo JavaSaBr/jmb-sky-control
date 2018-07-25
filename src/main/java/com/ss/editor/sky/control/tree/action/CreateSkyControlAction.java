@@ -11,6 +11,7 @@ import com.ss.editor.ui.control.tree.node.TreeNode;
 import com.ss.editor.util.EditorUtil;
 import javafx.scene.image.Image;
 import jme3utilities.sky.SkyControl;
+import jme3utilities.sky.StarsOption;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,6 +40,6 @@ public class CreateSkyControlAction extends AbstractCreateControlAction {
     @FxThread
     protected @NotNull Control createControl(@NotNull Spatial parent) {
         return new SkyControl(EditorUtil.getAssetManager(), EditorUtil.getGlobalCamera(),
-                0.9f, true, true);
+                0.9f, StarsOption.TwoDomes, true);
     }
 }

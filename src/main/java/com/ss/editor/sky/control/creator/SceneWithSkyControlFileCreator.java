@@ -2,14 +2,14 @@ package com.ss.editor.sky.control.creator;
 
 import com.jme3.light.AmbientLight;
 import com.jme3.light.DirectionalLight;
-import com.jme3.renderer.queue.RenderQueue;
+import com.jme3.renderer.queue.RenderQueue.ShadowMode;
 import com.jme3.shadow.EdgeFilteringMode;
 import com.ss.editor.annotation.FxThread;
 import com.ss.editor.extension.scene.SceneNode;
 import com.ss.editor.extension.scene.filter.impl.EditableFXAAFilter;
 import com.ss.editor.extension.scene.filter.impl.EditableHqDirectionalLightFromSceneShadowFilter;
 import com.ss.editor.sky.control.PluginMessages;
-import com.ss.editor.ui.component.creator.FileCreatorDescription;
+import com.ss.editor.ui.component.creator.FileCreatorDescriptor;
 import com.ss.editor.ui.component.creator.impl.EmptySceneCreator;
 import com.ss.editor.util.EditorUtil;
 import jme3utilities.sky.SkyControl;
@@ -22,12 +22,10 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SceneWithSkyControlFileCreator extends EmptySceneCreator {
 
-    public static final FileCreatorDescription DESCRIPTION = new FileCreatorDescription();
-
-    static {
-        DESCRIPTION.setFileDescription(PluginMessages.FILE_CREATOR_SCENE_WITH_SKY_CONTROL);
-        DESCRIPTION.setConstructor(SceneWithSkyControlFileCreator::new);
-    }
+    public static final FileCreatorDescriptor DESCRIPTOR = new FileCreatorDescriptor(
+            PluginMessages.FILE_CREATOR_SCENE_WITH_SKY_CONTROL,
+            SceneWithSkyControlFileCreator::new
+    );
 
     @Override
     @FxThread
@@ -59,7 +57,7 @@ public class SceneWithSkyControlFileCreator extends EmptySceneCreator {
         var sceneNode = super.createScene();
         sceneNode.addFilter(new EditableFXAAFilter());
         sceneNode.addFilter(shadowFilter);
-        sceneNode.setShadowMode(RenderQueue.ShadowMode.CastAndReceive);
+        sceneNode.setShadowMode(ShadowMode.CastAndReceive);
         sceneNode.addControl(skyControl);
         sceneNode.addLight(ambientLight);
         sceneNode.addLight(directionalLight);
