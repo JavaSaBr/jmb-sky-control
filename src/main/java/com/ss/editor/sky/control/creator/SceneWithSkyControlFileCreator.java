@@ -13,6 +13,7 @@ import com.ss.editor.ui.component.creator.FileCreatorDescriptor;
 import com.ss.editor.ui.component.creator.impl.EmptySceneCreator;
 import com.ss.editor.util.EditorUtil;
 import jme3utilities.sky.SkyControl;
+import jme3utilities.sky.StarsOption;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -34,7 +35,7 @@ public class SceneWithSkyControlFileCreator extends EmptySceneCreator {
         var assetManager = EditorUtil.getAssetManager();
         var camera = EditorUtil.getGlobalCamera();
 
-        var skyControl = new SkyControl(assetManager, camera, 0.9f, true, true);
+        var skyControl = new SkyControl(assetManager, camera, 0.9f, StarsOption.TopDome, true);
         skyControl.setCloudiness(1F);
         skyControl.setCloudsRate(2F);
 

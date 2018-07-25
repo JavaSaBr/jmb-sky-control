@@ -20,7 +20,6 @@ compileTestJava {
     options.compilerArgs += '-parameters'
 }
 
-ext.junitPlatformVersion = "1.0.0"
 ext.junitJupiterVersion = "5.2.0"
 
 mainClassName = "com.ss.editor.DevelopPluginStarter"

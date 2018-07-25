@@ -41,11 +41,13 @@ import java.net.URL;
 )
 public class SkyControlEditorPlugin extends EditorPlugin {
 
+    private static final Class<SkyControlEditorPlugin> OWNER = SkyControlEditorPlugin.class;
+
     private static final String GRADLE_DEPENDENCIES =
-            FileUtils.readFromClasspath("/com/ss/editor/sky/control/dependency/gradle.html");
+            FileUtils.readFromClasspath(OWNER, "/com/ss/editor/sky/control/dependency/gradle.html");
 
     private static final String MAVEN_DEPENDENCIES =
-            FileUtils.readFromClasspath("/com/ss/editor/sky/control/dependency/maven.html");
+            FileUtils.readFromClasspath(OWNER, "/com/ss/editor/sky/control/dependency/maven.html");
 
     public SkyControlEditorPlugin(@NotNull PluginContainer pluginContainer) {
         super(pluginContainer);
