@@ -20,6 +20,7 @@ public interface PluginMessages {
     @NotNull String MODEL_FILE_EDITOR_NODE_SUN_AND_STARS = RESOURCE_BUNDLE.getString("ModelFileEditorNodeSunAndStars");
     @NotNull String MODEL_FILE_EDITOR_NODE_UPDATER = RESOURCE_BUNDLE.getString("ModelFileEditorNodeUpdater");
 
+    @NotNull String MODEL_PROPERTY_START_OPTIONS = RESOURCE_BUNDLE.getString("ModelPropertyStarsOption");
     @NotNull String MODEL_PROPERTY_CLOUD_MODULATION = RESOURCE_BUNDLE.getString("ModelPropertyCloudModulation");
     @NotNull String MODEL_PROPERTY_LUNAR_PHASE = RESOURCE_BUNDLE.getString("ModelPropertyLunarPhase");
     @NotNull String MODEL_PROPERTY_CLOUDS_SPEED = RESOURCE_BUNDLE.getString("ModelPropertyCloudsSpeed");
