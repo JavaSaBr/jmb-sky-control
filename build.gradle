@@ -54,6 +54,18 @@ dependencies {
     testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
 }
 
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+
+    reports {
+        html.enabled = true
+    }
+}
+
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
